@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+  /* Eye icon */
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye-icon svg {
+  fill: #999;
+  width: 24px;
+  height: 24px;
+}
+
+.eye-icon:hover svg {
+  fill: #333;
+}
+
+
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <form id="myForm">
+        <input type="text" name="name" placeholder="Name">
+        <input type="email" name="email" placeholder="Email">
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <form id="SignUpForm" onsubmit="return vaidateRegisterForm(event)">
+        <!-- Other form elements -->
+        <div class="password-input">
+            <label for="password" class="signup-label">Password:</label>
+            <input type="password" name="password" id="password" />
+            <div id="passwordError" class="error-message"></div>
+            <svg class="eye-icon" width="24" height="24" viewBox="0 0 24 24">
+                <!-- Closed eye icon -->
+                <path class="eye-icon-closed" fill="none" d="M12,6c-3.31,0-6,2.69-6,6s2.69,6,6,6s6-2.69,6-6S15.31,6,12,6z M12,15c-1.66,0-3-1.34-3-3s1.34-3,3-3s3,1.34,3,3S13.66,15,12,15z"/>
+                <!-- Open eye icon -->
+                <path class="eye-icon-open" fill="none" d="M21.66,11.66c-0.39-0.39-1.02-0.39-1.41,0L17,14.17l-1.66-1.66c-0.39-0.39-1.02-0.39-1.41,0c-0.39,0.39-0.39,1.02,0,1.41L15.59,16c0.39,0.39,1.02,0.39,1.41,0L21.66,13C22.05,12.62,22.05,12.05,21.66,11.66z M12,9c2.21,0,4,1.79,4,4s-1.79,4-4,4s-4-1.79-4-4S9.79,9,12,9z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye eye-icon-closed" viewBox="0 0 16 16">
+                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash eye-icon-opened" viewBox="0 0 16 16">
+                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7 7 0 0 0-2.79.588l.77.771A6 6 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755q-.247.248-.517.486z"/>
+                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829"/>
+                <path d="M3.35 5.47q-.27.24-.518.487A13 13 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7 7 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12z"/>
+              </svg>
+        </div>
+        <!-- Other form elements -->
+
+
+
+    </form>
+
+
+    <form id="SignUpForm" onsubmit="return validateRegisterForm(event)">
+        <div id="signup-headers">
+          <h2 class="signup-form-title">Sign up</h2>
+          <p class="login-account">Already have an account? <a href="/login.html">Login Now</a></p>
+        </div>
+      
+        <fieldset>
+          <div class="signup-inputs">
+            <!-- Other input fields -->
+      
+            <div class="password-input">
+              <label for="password" class="signup-label">Password:</label>
+              <input type="password" name="password" id="password" />
+              <div id="passwordError" class="error-message"></div>
+              <div class="eye-icon" onclick="togglePasswordVisibility()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7zm1-4c0-.55-.45-1-1-1s-1 .45-1 1 .45 1 1 1 1-.45 1-1z"/>
+                </svg>
+              </div>
+            </div>
+      
+            <!-- Other input fields -->
+      
+            <button type="submit" class="signup-btn">Sign up</button>
+            <div id="SignupSent"></div>
+          </div>
+        </fieldset>
+      </form>
+      
+    
+    
+    <script src="/js/test.js"></script>
+</body>
+</html>
