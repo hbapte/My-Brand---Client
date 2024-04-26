@@ -53,7 +53,7 @@
                 aria-hidden="true"
               ></i>
               <div class="card_inner">
-                <p class="text-primary-p">Number of Subscribers</p>
+                <p class="text-primary-p">Published Blogs</p>
                 <span class="font-bold text-title">578</span>
               </div>
             </div>
@@ -61,38 +61,88 @@
             <div class="card">
               <i class="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
               <div class="card_inner">
-                <p class="text-primary-p">Times of Watching</p>
+                <p class="text-primary-p">Message Received</p>
                 <span class="font-bold text-title">2467</span>
               </div>
             </div>
 
-            <div class="card">
+            <!-- <div class="card">
               <i
                 class="fa fa-video-camera fa-2x text-yellow"
                 aria-hidden="true"
               ></i>
               <div class="card_inner">
-                <p class="text-primary-p">Number of Videos</p>
+                <p class="text-primary-p">Subscribers</p>
                 <span class="font-bold text-title">340</span>
-              </div>
+              </div> -->
             </div>
 
-            <div class="card">
-              <i
-                class="fa fa-thumbs-up fa-2x text-green"
-                aria-hidden="true"
-              ></i>
-              <div class="card_inner">
-                <p class="text-primary-p">Number of Likes</p>
-                <span class="font-bold text-title">645</span>
-              </div>
-            </div>
           </div>
           <!-- MAIN CARDS ENDS HERE -->
 
      
         </div>
       </main>
+
+
+      <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div>
+                <h2>Menu</h2>
+                <a href="#">Messages</a>
+                <a href="#">Blogs</a>
+                <a href="#">Comments</a>
+            </div>
+            <div>
+                <a href="#" onclick="logout()" class="button">Logout</a>
+            </div>
+        </div>
+    
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Admin dashboard</h1>
+    
+            <div>
+                <h2>Received Messages</h2>
+                <table id="messagesTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messagesBody">
+                        <!-- Messages will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+    
+            <div class="blog-container">
+                <h2>Published Blogs</h2>
+                <table id="blogsTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Author</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blogsBody">
+                        <!-- Blogs will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+    
+            <!-- New Blog Button -->
+            <div class="new-blog-button">
+                <a href="/blog" class="button">New Blog</a>
+            </div>
+        </div>
+    </div>
+    
 
       <div id="sidebar">
         <div class="sidebar__title">
