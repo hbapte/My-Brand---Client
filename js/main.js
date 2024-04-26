@@ -48,69 +48,66 @@ navLink.forEach(n => n.addEventListener('click', linkAction))
 // Live Validations
 document.getElementById('names').addEventListener('keyup', function() {
     validateField(this);
-  });
+});
   
-  document.getElementById('email').addEventListener('keyup', function() {
+document.getElementById('email').addEventListener('keyup', function() {
     validateField(this);
-  });
+});
   
-  document.getElementById('message').addEventListener('keyup', function() {
+document.getElementById('message').addEventListener('keyup', function() {
     validateField(this);
-  });
+});
   
-  // Function to perform live validation for input fields
-  function validateField(input) {
-      const fieldId = input.id;
-      const errorId = fieldId + "Error";
-      const value = input.value.trim();
-      const errorElement = document.getElementById(errorId);
-      errorElement.textContent = "";
-      input.classList.remove("invalid-input");
-  
-      switch (fieldId) {
-          case "names":
-              if (value === "") {
-                  errorElement.textContent = "Name(s) is required";
-                  input.classList.add("invalid-input");
-              } else if (value.length < 3 || !/^[a-zA-Z\s]*$/.test(value)) {
-                  errorElement.textContent = "Please enter a valid name with at least 3 characters.";
-                  input.classList.add("invalid-input");
-              } else if (value.length > 50) {
-                  errorElement.textContent = "Name(s) should not exceed 50 characters.";
-                  input.classList.add("invalid-input");
-              }
-              break;
-          case "email":
-              if (value === "") {
-                  errorElement.textContent = "Email is required";
-                  input.classList.add("invalid-input");
-              } else if (!validateEmail(value)) {
-                  errorElement.textContent = "Please enter a valid email address.";
-                  input.classList.add("invalid-input");
-              } else if (value.length > 100) {
-                  errorElement.textContent = "Email should not exceed 100 characters.";
-                  input.classList.add("invalid-input");
-              }
-              break;
-          case "message":
-              if (value === "") {
-                  errorElement.textContent = "Message is required";
-                  input.classList.add("invalid-input");
-              } else if (value.length < 5) {
-                  errorElement.textContent = "Message is too short. Please enter at least 5 characters.";
-                  input.classList.add("invalid-input");
-              } else if (value.length > 1000) {
-                  errorElement.textContent = "Message should not exceed 1000 characters.";
-                  input.classList.add("invalid-input");
-              }
-              break;
-          default:
-              break;
-      }
-  }
+// Function to perform live validation for input fields
+function validateField(input) {
+    const fieldId = input.id;
+    const errorId = fieldId + "Error";
+    const value = input.value.trim();
+    const errorElement = document.getElementById(errorId);
+    errorElement.textContent = "";
+    input.classList.remove("invalid-input");
 
-  
-// Other validations
+    switch (fieldId) {
+        case "names":
+            if (value === "") {
+                errorElement.textContent = "Name(s) is required";
+                input.classList.add("invalid-input");
+            } else if (value.length < 3 || !/^[a-zA-Z\s]*$/.test(value)) {
+                errorElement.textContent = "Please enter a valid name with at least 3 characters.";
+                input.classList.add("invalid-input");
+            } else if (value.length > 50) {
+                errorElement.textContent = "Name(s) should not exceed 50 characters.";
+                input.classList.add("invalid-input");
+            }
+            break;
+        case "email":
+            if (value === "") {
+                errorElement.textContent = "Email is required";
+                input.classList.add("invalid-input");
+            } else if (!validateEmail(value)) {
+                errorElement.textContent = "Please enter a valid email address.";
+                input.classList.add("invalid-input");
+            } else if (value.length > 100) {
+                errorElement.textContent = "Email should not exceed 100 characters.";
+                input.classList.add("invalid-input");
+            }
+            break;
+        case "message":
+            if (value === "") {
+                errorElement.textContent = "Message is required";
+                input.classList.add("invalid-input");
+            } else if (value.length < 5) {
+                errorElement.textContent = "Message is too short. Please enter at least 5 characters.";
+                input.classList.add("invalid-input");
+            } else if (value.length > 1000) {
+                errorElement.textContent = "Message should not exceed 1000 characters.";
+                input.classList.add("invalid-input");
+            }
+            break;
+        default:
+            break;
+    }
+}
 
 function validateEmail(email) {
     var emailPattern = /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -132,8 +129,6 @@ function validateForm(event) {
     document.getElementById("names").classList.remove("invalid-input");
     document.getElementById("email").classList.remove("invalid-input");
     document.getElementById("message").classList.remove("invalid-input");
-
-    
 
     // Validating names
     if (names === "") {
@@ -170,6 +165,7 @@ function validateForm(event) {
         document.getElementById("email").classList.add("invalid-input");
         isValid = false;
     }
+
     // Validating Message
     if (message === "") {
         document.getElementById("messageError").textContent = "Message is required";
@@ -188,9 +184,13 @@ function validateForm(event) {
         isValid = false;   
     }
 
+    // If form is valid, send the message
+    if (isValid) {
+        sendMessage(names, email, message);
+    }
+}
 
-
-// When all validation passes
+// Define the sendMessage function separately
 function sendMessage(names, email, message) {
     var formData = {
         names: names,
@@ -230,178 +230,5 @@ function sendMessage(names, email, message) {
     });
 }
 
-function validateForm(event) {
-    event.preventDefault();
-
-    var names = document.getElementById("names").value.trim();
-    var email = document.getElementById("email").value.trim();
-    var message = document.getElementById("message").value.trim();
-    var isValid = true;
-
-    // Your validation logic...
-
-    if (isValid) {
-        sendMessage(names, email, message);
-    }
-}
-
-
-
-// LOGIN FORM
-document.getElementById('LoginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); 
-
-    var emailUsername = document.getElementById('email-username').value.trim();
-    var password = document.getElementById('password-').value.trim();
-    var emailUsernameError = document.getElementById('email-usernameError');
-    var passwordError = document.getElementById('password-Error');
-    var rememberMeCheckbox = document.getElementById('remember-me');
-    var valid = true;
-
-    // Reset previous error messages
-    emailUsernameError.textContent = '';
-    passwordError.textContent = '';
-
-        // Validate email/username only if it's not empty
-        if (emailUsername === '') {
-            emailUsernameError.textContent = 'Email is required';
-            valid = false;
-          }
-      
-          // Validate password only if it's not empty
-          if (password === '') {
-            passwordError.textContent = 'Password is required';
-            valid = false;
-          }
-      
-          // If both fields are not empty, perform further validation
-          if (emailUsername !== '' && password !== '') {
-            // Validate username format
-            if (!/^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailUsername)) {
-              emailUsernameError.textContent = 'Invalid email';
-              valid = false;
-            }
-      
-           
-            if (password.length < 6) {
-              passwordError.textContent = 'Password should be at least 6 characters long';
-              valid = false;
-            }
-        }
-
-
-
-    if (!valid) {
-      return;
-    }
-
-    // local storage
-    var registrationData = JSON.parse(localStorage.getItem('registrationData'));
-    if (!registrationData) {
-      document.getElementById('LoginSent').textContent = 'Please create an account first';
-      return;
-    }
-
-    // Check if the provided email/username and password match any stored registration data
-    var user = registrationData.find(function(userData) {
-      return (userData.email === emailUsername || userData.username === emailUsername) && userData.password === password;
-    });
-
-    if (user) {
-        // If user is found, display a success message
-        var LoginMessage = document.getElementById('LoginSent');
-        LoginMessage.textContent = 'Login successfully!';
-        LoginMessage.style.color = 'green';
-        // document.getElementById('LoginSent').classList.remove('erro-message');
-    
-        // let loginData = [{   
-        //     userEmail: emailUsername,
-        //     userPassword: password,
-        //     rememberMe: rememberMeCheckbox.checked,
-        // }];
-        
-        // console.log("Login Data:", loginData);
-    
-        // Set a timeout to remove the success message after 5 seconds
-        setTimeout(function() {
-            document.getElementById('LoginSent').textContent = '';
-        }, 5000); // 5 seconds
-    } else {
-        // If user is not found or password is incorrect, display an error message
-        var errorMessageElement = document.getElementById('LoginSent');
-        errorMessageElement.textContent = 'incorrect Email or password';
-        errorMessageElement.style.color = 'red';
-        errorMessageElement.style.textAlign= 'center'; // Set text color to red
-        // errorMessageElement.classList.add('erro-message');
-      
-        // Set a timeout to remove the error message after 3.5 seconds
-        setTimeout(function() {
-            errorMessageElement.textContent = '';
-            // errorMessageElement.classList.remove('erro-message');
-        }, 3500); 
-    }
-    
-      
-
-    // Implement Remember Me
-if(rememberMeCheckbox.checked) {
-var rememberedEmailUsernames = JSON.parse(localStorage.getItem('rememberedEmailUsernames') || '[]');
-if (!rememberedEmailUsernames.includes(emailUsername)) {
-    rememberedEmailUsernames.push(emailUsername);
-    localStorage.setItem('rememberedEmailUsernames', JSON.stringify(rememberedEmailUsernames));
-}}
-
-
-    
-});
-
-
-// Keyup event listener for live validation
-document.getElementById('email-username').addEventListener('keyup', function() {
-    var emailUsername = this.value.trim();
-    var emailUsernameError = document.getElementById('email-usernameError');
-
-    emailUsernameError.textContent = '';
-
-    // Validate email/username if it's not empty
-    if (emailUsername === '') {
-      emailUsernameError.textContent = 'Email is required';
-    }
-
-    if (!/^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailUsername)) {
-        emailUsernameError.textContent = 'Invalid email';
-        valid = false;
-      }
-
-});
-
-
-
-
-  // Keyup event listener for live validation
-  document.getElementById('password-').addEventListener('keyup', function() {
-    var password = this.value.trim();
-    var passwordError = document.getElementById('password-Error');
-
-    passwordError.textContent = '';
-
-    // Validate password if it's not empty
-    if (password !== '') {
-      // Validate password strength (for example, at least 6 characters)
-      if (password.length < 6) {
-        passwordError.textContent = 'Password should be at least 6 characters long';
-      }
-    }
-  })
-
-
-  //Toggle Password Visibility
-
-  function myFunction() {
-    var x = document.getElementById("password-");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }}
+// Add event listener for form submission
+document.getElementById("contactForm").addEventListener("submit", validateForm);
