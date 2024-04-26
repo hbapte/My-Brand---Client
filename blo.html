@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog List</title>
+</head>
+<body>
+    <div id="blogList"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const blogList = document.getElementById("blogList");
+
+            try {
+                const response = await fetch("http://localhost:3000/api/blogs");
+                const blogs = await response.json();
+
+                // Check if there are any blogs
+                if (blogs.length === 0) {
+                    blogList.innerHTML = "<p>No blogs found</p>";
+                } else {
+                    // Clear the existing content
+                    blogList.innerHTML = "";
+
+                    // Loop through each blog and create HTML elements to display them
+                    blogs.forEach(blog => {
+                        const blogItem = document.createElement("div");
+                        blogItem.classList.add("blog-item");
+                        blogItem.innerHTML = `
+                            <h2>${blog.title}</h2>
+                            <p>${blog.content}</p>
+                            <p><strong>Author:</strong> ${blog.author}</p>
+                            <p><strong>Created At:</strong> ${new Date(blog.createdAt).toLocaleString()}</p>
+                            <p><strong>Updated At:</strong> ${new Date(blog.updatedAt).toLocaleString()}</p>
+                        `;
+                        blogList.appendChild(blogItem);
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching blogs:", error);
+                blogList.innerHTML = "<p>Error fetching blogs</p>";
+            }
+        });
+    </script>
+</body>
+</html>
