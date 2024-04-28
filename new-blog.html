@@ -52,9 +52,9 @@
             const content = document.getElementById('content').value;
             const author = document.getElementById('author').value;
             const excerpt = document.getElementById('excerpt').value;
-            const tags = document.getElementById('tags').value.split(',').map(tag => tag.trim()); // Split tags by comma and trim whitespace
+            const tags = document.getElementById('tags').value.split(',').map(tag => tag.trim()); 
             const readingTime = document.getElementById('readingTime').valueAsNumber;
-            const featuredImage = document.getElementById('featuredImage').files[0]; // Get the selected file
+            const featuredImage = document.getElementById('featuredImage').files[0]; 
 
             const formData = new FormData();
             formData.append('title', title);
@@ -82,7 +82,7 @@
                 console.log('Blog created successfully:', data);
 
                 // Redirect to the dashboard after successful blog creation
-                window.location.href = './admin.html'; // Change to your dashboard URL
+                window.location.href = '/admin/dashboard.html'; // Change to your dashboard URL
             } catch (error) {
                 console.error('Error creating blog:', error.message);
                 // Handle error: display error message to the user
