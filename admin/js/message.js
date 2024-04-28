@@ -1,4 +1,3 @@
-
 var sidebarOpen = false;
 var sidebar = document.getElementById("sidebar");
 var sidebarCloseIcon = document.getElementById("sidebarIcon");
@@ -55,7 +54,7 @@ async function fetchAndDisplayMessages() {
             messagesBody.appendChild(row);
         });
 
-        // Update message count badge
+      
         messageCountBadge.textContent = messages.length;
 
         // Hide loader
@@ -69,13 +68,13 @@ async function fetchAndDisplayMessages() {
     }
 }
 
-// Call the function when the page loads
+
 window.addEventListener('load', () => {
     fetchAndDisplayMessages();
 });
 
 
-// Function to delete a message
+
 async function deleteMessage(messageId) {
     try {
         const response = await fetch(`https://my-brand-oxuh.onrender.com/api/contact/${messageId}`, {
@@ -92,7 +91,6 @@ async function deleteMessage(messageId) {
     }
 }
 
-// Call the function when the page loads
 window.addEventListener('load', () => {
     fetchAndDisplayMessages();
 });

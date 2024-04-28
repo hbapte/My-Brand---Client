@@ -51,11 +51,52 @@
                         </thead>
                         <tbody id="blogsBody">
                             <div id="loader" class="loader"></div>
-                            <!-- Blogs will be populated here -->
+                
                         </tbody>
                     </table>
                 </div>
             </div>
+
+
+
+            <div id="editPopup" class="edit-popup">
+                <div class="edit-popup-content">
+                    <span class="close-btn" onclick="closeEditPopup()">&times;</span>
+                    <h2>Edit Blog</h2>
+                    <form id="editForm">
+                        <div class="input-group">
+                            <label for="editTitle">Title:</label>
+                            <input type="text" id="editTitle" name="editTitle">
+                        </div>
+                        <div class="input-group">
+                            <label for="editTags">Tags:</label>
+                            <input type="text" id="editTags" name="editTags">
+                        </div>
+                        <div class="input-group">
+                            <label for="editExcerpt">Excerpt:</label>
+                            <textarea id="editExcerpt" name="editExcerpt"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="editReadingTime">Reading Time:</label>
+                            <input type="text" id="editReadingTime" name="editReadingTime">
+                        </div>
+                        <div class="input-group">
+                            
+                            <div class="input-group">
+                                <label for="editFeaturedImage">Featured Image:</label>
+                                <input type="text" id="editFeaturedImage" name="editFeaturedImage">
+                                <input type="file" id="editFeaturedImageFile" style="display: none;" accept="image/*">
+                                <button type="button" onclick="document.getElementById('editFeaturedImageFile').click()">Select Image</button>
+                            </div>
+                        <div class="edit-btns">
+                            <button type="submit" class="save-btn">Save Changes</button>
+                            <button type="button" class="cancel-btn" onclick="closeEditPopup()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+
         </main>
 
         <div id="sidebar">
