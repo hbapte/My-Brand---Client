@@ -30,7 +30,7 @@ label {
     font-weight: bold;
 }
 
-input[type="text"],
+input[type="text"],input[type="number"],
 textarea {
     width: 100%;
     padding: 10px;
@@ -52,6 +52,7 @@ button[type="submit"] {
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
+    margin: 10px 0;
 }
 
 button[type="submit"]:hover {
