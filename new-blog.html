@@ -44,7 +44,7 @@
             event.preventDefault();
 
             if (!form.checkValidity()) {
-                // If the form is not valid, do not submit
+              
                 return;
             }
 
@@ -61,7 +61,7 @@
             formData.append('content', content);
             formData.append('author', author);
             formData.append('excerpt', excerpt);
-            formData.append('tags', JSON.stringify(tags)); // Convert tags array to JSON string
+            formData.append('tags', JSON.stringify(tags)); 
             formData.append('readingTime', readingTime);
             formData.append('featuredImage', featuredImage);
 
@@ -82,10 +82,10 @@
                 console.log('Blog created successfully:', data);
 
                 // Redirect to the dashboard after successful blog creation
-                window.location.href = '/admin/dashboard.html'; // Change to your dashboard URL
+                window.location.href = '/admin/dashboard.html'; 
             } catch (error) {
                 console.error('Error creating blog:', error.message);
-                // Handle error: display error message to the user
+              
             }
         });
     });

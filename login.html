@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ishimwe Jean Baptiste - Login</title>
+    <title>Login - My Brand</title>
     <link rel="stylesheet" href="css/style3.css">
     
 </head>
@@ -82,7 +82,7 @@
 
             <div class="forgot-linkk">
             <label for="password-" class="login-label">Password:</label>
-            <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
+            <a href="/forgetpassword.html" class="forgot-link">Forgot Password?</a>
              </div>
             <input
               type="password"
@@ -107,6 +107,8 @@
                   <label for="togglePasswordVisibility">Show Password</label>
                   </div>
 
+                  
+
                </div>
             </div>
     
@@ -130,6 +132,26 @@
 
     </main> 
     <!-- <script src="/js/login.js"></script> -->
+    <script>
+      //      function myFunction() {
+      //   var x = document.getElementById("password");
+      //   if (x.type === "password") {
+      //     x.type = "text";
+      //   } else {
+      //     x.type = "password";
+      //   }
+      // }
+
+         // PASSWORD VISIBILITY
+    const passwordInput = document.getElementById('password');
+    const toggleVisibilityBtn = document.getElementById('togglePasswordVisibility');
+  
+    toggleVisibilityBtn.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+    });
+  
+    </script>
 
 
      <!-- ====== FOOTER ====== -->
