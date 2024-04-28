@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(data => {
                     console.log('Login successful:', data);
                     // Redirect to admin.html upon successful login
-                    window.location.href = 'admin.html';
+                    window.location.href = '/admin/dashboard.html';
                 })
                 .catch(() => {
                     throw new Error('Invalid JSON response');
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Login error:', error);
-            // Handle login failure (optional)
+         
             showError('Login failed. Please check your credentials.');
         });
     });
