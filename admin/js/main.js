@@ -44,6 +44,15 @@ function toggleSidebar() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
+  const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
+  if (tokenCookie) {
+    // Redirect to the root URL if the token exists
+    window.location.href = '/';
+  }
+});
+
 fetchAndDisplayPublishedBlogsCount(); // Fetch and display published blogs count when the page loads
 
 // Update the JavaScript code

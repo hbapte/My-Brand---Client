@@ -8,14 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
-    const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
-    if (tokenCookie) {
-      // Redirect to the root URL if the token exists
-      window.location.href = '/';
-    }
-});
 
 
 //Nav Menu
