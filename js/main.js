@@ -46,77 +46,13 @@ navLink.forEach(n => n.addEventListener('click', linkAction))
 
 
 // Contact Form
-// Live Validations
-document.getElementById('names').addEventListener('keyup', function() {
-    validateField(this);
-});
-  
-document.getElementById('email').addEventListener('keyup', function() {
-    validateField(this);
-});
-  
-document.getElementById('message').addEventListener('keyup', function() {
-    validateField(this);
-});
-  
-// Function to perform live validation for input fields
-function validateField(input) {
-    const fieldId = input.id;
-    const errorId = fieldId + "Error";
-    const value = input.value.trim();
-    const errorElement = document.getElementById(errorId);
-    errorElement.textContent = "";
-    input.classList.remove("invalid-input");
-
-    switch (fieldId) {
-        case "names":
-            if (value === "") {
-                errorElement.textContent = "Name(s) is required";
-                input.classList.add("invalid-input");
-            } else if (value.length < 3 || !/^[a-zA-Z\s]*$/.test(value)) {
-                errorElement.textContent = "Please enter a valid name with at least 3 characters.";
-                input.classList.add("invalid-input");
-            } else if (value.length > 50) {
-                errorElement.textContent = "Name(s) should not exceed 50 characters.";
-                input.classList.add("invalid-input");
-            }
-            break;
-        case "email":
-            if (value === "") {
-                errorElement.textContent = "Email is required";
-                input.classList.add("invalid-input");
-            } else if (!validateEmail(value)) {
-                errorElement.textContent = "Please enter a valid email address.";
-                input.classList.add("invalid-input");
-            } else if (value.length > 100) {
-                errorElement.textContent = "Email should not exceed 100 characters.";
-                input.classList.add("invalid-input");
-            }
-            break;
-        case "message":
-            if (value === "") {
-                errorElement.textContent = "Message is required";
-                input.classList.add("invalid-input");
-            } else if (value.length < 5) {
-                errorElement.textContent = "Message is too short. Please enter at least 5 characters.";
-                input.classList.add("invalid-input");
-            } else if (value.length > 1000) {
-                errorElement.textContent = "Message should not exceed 1000 characters.";
-                input.classList.add("invalid-input");
-            }
-            break;
-        default:
-            break;
-    }
-}
-
-function validateEmail(email) {
-    var emailPattern = /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailPattern.test(email);
-}
+// Remove live validation event listeners
+document.getElementById('names').removeEventListener('keyup', validateField);
+document.getElementById('email').removeEventListener('keyup', validateField);
+document.getElementById('message').removeEventListener('keyup', validateField);
 
 function validateForm(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission action
 
     var names = document.getElementById("names").value.trim();
     var email = document.getElementById("email").value.trim();
@@ -233,3 +169,9 @@ function sendMessage(names, email, message) {
 
 // Add event listener for form submission
 document.getElementById("contactForm").addEventListener("submit", validateForm);
+
+// Function to validate email
+function validateEmail(email) {
+    var emailPattern = /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+}
