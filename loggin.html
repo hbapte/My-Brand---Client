@@ -554,7 +554,7 @@ input:checked {
 <body>
 
     <main id="main-login">
-    <form id="LoginForm">
+    <form id="LoginForm" action="https://my-brand-oxuh.onrender.com/api/auth/login" method="post">
         <div id="login-form-container">
           <div class="login-header">
         <h2 class="login-form-title"> Sign In</h2>
@@ -568,7 +568,7 @@ input:checked {
               type="text"
               name="email-username"
               id="email-username"
-             
+             required
              
             />
             <div id="email-usernameError" class="error-message"></div>
@@ -580,9 +580,8 @@ input:checked {
             <input
               type="password"
               name="password-"
-              id="password-"
-             
-              
+              id="password-"             
+              required
             />
             <div id="password-Error" class="error-message"></div>
 
