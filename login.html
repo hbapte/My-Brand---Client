@@ -630,5 +630,24 @@ input:checked {
   <footer>
     <p class="footer-p">Ishimwe Jean Baptiste &copy; 2024</p>
   </footer>
+
+  <script>
+    function myFunction() {
+      var x = document.getElementById("password-");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    } 
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
+    const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
+    if (tokenCookie) {
+      window.location.href = '/admin/dashboard.html'; // Redirect to task page
+    }
+  });
+    </script>
 </body>
 </html>
