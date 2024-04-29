@@ -8,29 +8,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-       // Check if the user has a login token when the page loads
-       document.addEventListener('DOMContentLoaded', function () {
-        const token = getTokenFromCookie(); // Get the login token from cookie
-        if (!token) {
-            // Redirect to the login page if the token is not present
-            redirectToLogin();
-        }
-    });
-
-    // Function to get the login token from cookie
-    function getTokenFromCookie() {
-        const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
-        const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
-        return tokenCookie ? tokenCookie[1] : null;
+document.addEventListener('DOMContentLoaded', function () {
+    const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
+    const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
+    if (tokenCookie) {
+      // Redirect to the root URL if the token exists
+      window.location.href = '/';
     }
+});
 
-    // Function to redirect to the login page
-    function redirectToLogin() {
-        // Redirect to the login page URL
-        window.location.href = '/login.html?sessionExpired=true';
-    }
-  
 
 //Nav Menu
 
