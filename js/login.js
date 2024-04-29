@@ -3,13 +3,25 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // Prevent the form from submitting normally
         
         // Get the form data
-        const formData = new FormData(this);
+        const emailUsername = document.getElementById('email-username').value.trim();
+        const password = document.getElementById('password-').value.trim();
         
-        // Serialize the form data into JSON format
-        const jsonData = {};
-        formData.forEach((value, key) => {
-            jsonData[key] = value;
-        });
+        // Validate form inputs
+        if (emailUsername === '') {
+            showError('Email or username is required.');
+            return;
+        }
+
+        if (password === '') {
+            showError('Password is required.');
+            return;
+        }
+
+        // Prepare the data to be sent
+        const formData = {
+            emailUsername: emailUsername,
+            password: password
+        };
 
         // Send a POST request to the login endpoint
         fetch('https://my-brand-oxuh.onrender.com/api/auth/login', {
@@ -17,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(jsonData)
+            body: JSON.stringify(formData)
         })
         .then(response => {
             if (!response.ok) {
@@ -36,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Login error:', error);
-         
             showError('Login failed. Please check your credentials.');
         });
     });
@@ -49,6 +60,7 @@ function showError(message) {
     errorMessageElement.style.color = 'red';
     errorMessageElement.style.textAlign = 'center';
 
+    // Clear the error message after 3 seconds
     setTimeout(function () {
         errorMessageElement.textContent = '';
     }, 3000);
