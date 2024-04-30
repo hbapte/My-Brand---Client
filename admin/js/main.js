@@ -1,3 +1,15 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const token = localStorage.getItem('jwt');
+  const expiryTime = localStorage.getItem('expiryTime');
+  
+  if (!token || !expiryTime || Date.now() > expiryTime) {
+    // Token has expired or doesn't exist, remove it from localStorage
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('expiryTime');
+    window.location.href = '/login.html?sessionExpired=true';
+  }
+});
+
 
 var sidebarOpen = false;
 var sidebar = document.getElementById("sidebar");
@@ -28,6 +40,8 @@ function toggleSidebar() {
     }
   }
 
+  
+
        // Check if the user has a login token when the page loads
 
   
@@ -44,14 +58,9 @@ function toggleSidebar() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
-  const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
-  if (tokenCookie) {
-    // Redirect to the root URL if the token exists
-    window.location.href = '/';
-  }
-});
+
+
+
 
 fetchAndDisplayPublishedBlogsCount(); // Fetch and display published blogs count when the page loads
 

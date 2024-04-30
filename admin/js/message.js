@@ -1,3 +1,15 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const token = localStorage.getItem('jwt');
+  const expiryTime = localStorage.getItem('expiryTime');
+  
+  if (!token || !expiryTime || Date.now() > expiryTime) {
+    // Token has expired or doesn't exist, remove it from localStorage
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('expiryTime');
+    window.location.href = '/login.html?sessionExpired=true';
+  }
+});
+
 var sidebarOpen = false;
 var sidebar = document.getElementById("sidebar");
 var sidebarCloseIcon = document.getElementById("sidebarIcon");

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const messageDiv = document.getElementById("message");
   
     loginForm.addEventListener("submit", async function (event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault(); 
   
       const formData = new FormData(loginForm);
       const formDataJSON = {};
@@ -23,13 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const responseData = await response.json();
   
         if (response.ok) {
-          // Successful login
           messageDiv.textContent = "Login successful";
           messageDiv.style.color = "green";
-          // Redirect to dashboard or any other page
+  
+          const token = responseData.token;
+          const expiryTime = Date.now() + 60 * 60 * 1000; // 1 hour from now
+          localStorage.setItem('jwt', token);
+          localStorage.setItem('expiryTime', expiryTime);
+  
           window.location.href = "/admin/dashboard.html";
         } else if (response.status === 401) {
-          // User not found, wrong password, or unverified email
+
           if (responseData.error === 'User not found') {
             messageDiv.textContent = 'User not found';
           } else if (responseData.error === 'Please verify your email before logging in') {
@@ -51,20 +55,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   
+  // Function to retrieve the JWT token from localStorage
+  function getToken() {
+    const expiryTime = localStorage.getItem('expiryTime');
+    if (!expiryTime || Date.now() > expiryTime) {
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('expiryTime');
 
-  function myFunction() {
-    var x = document.getElementById("password-");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
+      window.location.href = "/login.html?SessionExpired=true";
+      return null;
     }
-  } 
-
-  document.addEventListener('DOMContentLoaded', function () {
-  const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
-  const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
-  if (tokenCookie) {
-    window.location.href = '/admin/dashboard.html'; // Redirect to task page
+    return localStorage.getItem('jwt');
   }
-});
+  
