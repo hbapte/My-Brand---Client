@@ -135,7 +135,7 @@ function sendMessage(names, email, message) {
         message: message
     };
 
-    return fetch('https://my-brand-oxuh.onrender.com/api/contact', {
+    return fetch('http://localhost:3000/api/contact', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
