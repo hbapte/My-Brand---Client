@@ -17,16 +17,11 @@ Figma Design: [My Brand Figma Design](https://www.figma.com/file/CE5IDZeOPQJRojW
 
 ## Table of Contents
 
-* [Introduction](#introduction)
 * [Features](#features)
 * [Dashboard](#dashboard)
 * [Design](#design)
 * [Links](#links)
 * [Licence](#licence)
-
-## Introduction
-
-MyBrand is a project aimed at providing a platform for users to publish and manage their blogs. This frontend repository contains the user interface components and logic necessary for interacting with the backend services.
 
 ## Features
 
