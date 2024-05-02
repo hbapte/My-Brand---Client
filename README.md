@@ -1,3 +1,7 @@
+# My Brand Frontend
+
+This repository contains the frontend codebase for My Brand, a web application designed for managing blogs, user authentication, and more.
+
 ## Links
 
 * [Live Demo Website](https://my-brand-client.vercel.app/)
