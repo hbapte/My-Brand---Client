@@ -1,6 +1,6 @@
 # My Brand - Portfolio Website
 
-Welcome to My Brand, a portfolio website showcasing your skills, projects, and achievements. This website serves as your online presence, allowing visitors to learn more about you and your work.
+Welcome to My Brand, a portfolio website showcasing skills, projects, blogs, and achievements. This website serves as your online presence, allowing visitors to learn more about you and your work.
 
 ## Live Demo
 
