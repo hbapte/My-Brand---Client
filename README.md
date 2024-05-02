@@ -1,34 +1,58 @@
-# My Brand - Portfolio Website
+# My Brand Frontend
 
-Welcome to My Brand, a portfolio website showcasing your skills, projects, and achievements. This website serves as your online presence, allowing visitors to learn more about you and your work.
+This repository contains the frontend codebase for My Brand, a web application designed for managing blogs, user authentication, and more.
 
-## Live Demo
+## Links
 
-Check out the live demo: [My Brand Portfolio Website](https://my-brand-client.vercel.app/)
+* [Live Demo Website](https://my-brand-client.vercel.app/)
+* [Backend Hosted API](https://my-brand-oxuh.onrender.com/)
+* [GitHub Repository (Frontend)](https://github.com/hbapte/MyBrand-Client)
+* [GitHub Repository (Backend)](https://github.com/hbapte/MyBrand-Backend)
+
+## Design
+
+The design of the frontend components is based on the Figma design:
+
+Figma Design: [My Brand Figma Design](https://www.figma.com/file/CE5IDZeOPQJRojWrN6DIlN/My-Brand?type=design&node-id=0%3A1&mode=design&t=uQ1MBPbQU0YkinBT-1)
+
+## Table of Contents
+
+* [Introduction](#introduction)
+* [Features](#features)
+* [Dashboard](#dashboard)
+* [Design](#design)
+* [Links](#links)
+* [Licence](#licence)
+
+## Introduction
+
+MyBrand is a project aimed at providing a platform for users to publish and manage their blogs. This frontend repository contains the user interface components and logic necessary for interacting with the backend services.
 
 ## Features
 
-- **Home Page**: Introduce yourself and provide an overview of your skills and expertise.
-- **Projects Page**: Showcase your projects with descriptions, images, and links.
-- **Contact Page**: Allow visitors to get in touch with you via a contact form.
-- **Responsive Design**: Ensures that the website looks great on all devices, including desktops, tablets, and mobile phones.
+* **User Authentication**: Secure login and registration functionality.
+* **Blog Management**: Create, edit, and delete blogs.
+* **Dashboard**: Access to a dashboard for managing blogs and user settings.
+* **Responsive Design**: Ensures compatibility across various devices and screen sizes.
 
 ## Technologies Used
 
-- **HTML/CSS**: For building the structure and styling of the website.
-- **JavaScript**: For interactive features and functionality.
-- **Vercel**: Hosting platform for deploying and serving the website.
+* **HTML/CSS**: For building the structure and styling of the website.
+* **JavaScript**: For interactive features and functionality.
+* **Vercel**: Hosting platform for deploying and serving the website.
 
-## Deployment
+## Dashboard
 
-The website is deployed using Vercel. Any changes pushed to the `main` branch will automatically trigger a new deployment.
+Access the dashboard for advanced management features:
+
+* Dashboard URL : [https://my-brand-client.vercel.app/admin/dashboard.html](https://my-brand-client.vercel.app/admin/dashboard.html)
 
 ## Backend Repository
 
 The backend of this project is available in a separate repository:
 
-- **GitHub**: [My Brand Backend Repository](https://github.com/hbapte/My-Brand)
+* **GitHub**: [My Brand Backend Repository](https://github.com/hbapte/My-Brand)
 
-## Contributing
+## Licence
 
-Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
+This project is licensed under the [MIT License](/LICENCE).
