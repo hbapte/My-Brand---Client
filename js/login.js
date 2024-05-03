@@ -4,67 +4,86 @@ document.addEventListener("DOMContentLoaded", function () {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
 
-  loginForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
 
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-
-      const valid = validateLoginForm(email, password);
-      if (!valid) return; 
-
-      const formData = new FormData(loginForm);
-      const formDataJSON = {};
-      formData.forEach((value, key) => {
-          formDataJSON[key] = value;
-      });
-
-      try {
-          const response = await fetch("https://my-brand-oxuh.onrender.com/api/auth/login", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json"
-              },
-              body: JSON.stringify(formDataJSON)
-          });
-
-          const responseData = await response.json();
-
-          if (response.ok) {
-              showSuccessMessage("Login successful");
-
-              const token = responseData.token;
-              const expiryTime = Date.now() + 60 * 60 * 1000; // 1 hour from now
-              localStorage.setItem('jwt', token);
-              localStorage.setItem('expiryTime', expiryTime);
-
-              window.location.href = "/admin/dashboard.html";
-          } else if (response.status === 401) {
-              if (responseData.error === 'User not found') {
-                  showError('User not found');
-              } else if (responseData.error === 'Please verify your email before logging in') {
-                  showError('Please verify your email before logging in');
-              } else {
-                  showError('Wrong password');
-              }
-          } else {
-              // Other errors
-              showError(responseData.error || "An error occurred");
-          }
-      } catch (error) {
-          console.error("Error:", error);
-          showError("An error occurred");
-      }
+  emailInput.addEventListener("input", function () {
+    const email = emailInput.value.trim();
+    const emailError = document.getElementById("email-Error");
+    if (email === "") {
+      emailError.textContent = "Email is required";
+    } else if (!validateEmail(email)) {
+      emailError.textContent = "Invalid email";
+    } else {
+      emailError.textContent = "";
+    }
   });
 
-  // PASSWORD VISIBILITY =======
-  function togglePasswordVisibility() {
-      if (passwordInput.type === "password") {
-          passwordInput.type = "text";
+
+  passwordInput.addEventListener("input", function () {
+    const password = passwordInput.value.trim();
+    const passwordError = document.getElementById("password-Error");
+    if (password === "") {
+      passwordError.textContent = "Password is required";
+    } else if (password.length < 6) {
+      passwordError.textContent = "Password should be at least 6 characters long";
+    } else if (!isPasswordStrong(password)) {
+      passwordError.textContent = "Password requires capital & lowercase letters, number & special character";
+    } else {
+      passwordError.textContent = "";
+    }
+  });
+
+  loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    const valid = validateLoginForm(email, password);
+    if (!valid) return; 
+
+    const formData = new FormData(loginForm);
+    const formDataJSON = {};
+    formData.forEach((value, key) => {
+      formDataJSON[key] = value;
+    });
+
+    try {
+      const response = await fetch("https://my-brand-oxuh.onrender.com/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formDataJSON)
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        showSuccessMessage("Login successful");
+
+        const token = responseData.token;
+        const expiryTime = Date.now() + 60 * 60 * 1000; // 1 hour from now
+        localStorage.setItem('jwt', token);
+        localStorage.setItem('expiryTime', expiryTime);
+
+        window.location.href = "/admin/dashboard.html";
+      } else if (response.status === 401) {
+        if (responseData.error === 'User not found') {
+          showError('User not found');
+        } else if (responseData.error === 'Please verify your email before logging in') {
+          showError('Please verify your email before logging in');
+        } else {
+          showError('Wrong password');
+        }
       } else {
-          passwordInput.type = "password";
+
+        showError(responseData.error || "An error occurred");
       }
-  }
+    } catch (error) {
+      console.error("Error:", error);
+      showError("An error occurred");
+    }
+  });
 });
 
 // Function to perform client-side validation
@@ -73,29 +92,28 @@ function validateLoginForm(email, password) {
   const passwordError = document.getElementById("password-Error");
   let valid = true;
 
-  // Reset previous error messages
   emailError.textContent = "";
   passwordError.textContent = "";
 
   // Validate email
   if (email === "") {
-      emailError.textContent = "Email is required";
-      valid = false;
+    emailError.textContent = "Email is required";
+    valid = false;
   } else if (!validateEmail(email)) {
-      emailError.textContent = "Invalid email";
-      valid = false;
+    emailError.textContent = "Invalid email";
+    valid = false;
   }
 
   // Validate password
   if (password === "") {
-      passwordError.textContent = "Password is required";
-      valid = false;
+    passwordError.textContent = "Password is required";
+    valid = false;
   } else if (password.length < 6) {
-      passwordError.textContent = "Password should be at least 6 characters long";
-      valid = false;
+    passwordError.textContent = "Password should be at least 6 characters long";
+    valid = false;
   } else if (!isPasswordStrong(password)) {
-      passwordError.textContent = "Password requires capital & lowercase letters, number & special character";
-      valid = false;
+    passwordError.textContent = "Password requires capital & lowercase letters, number & special character";
+    valid = false;
   }
 
   return valid;
@@ -135,19 +153,20 @@ function showError(message) {
   }, 3000);
 }
 
-  
-  // Function to retrieve the JWT token from localStorage
-  function getToken() {
-    const expiryTime = localStorage.getItem('expiryTime');
-    if (!expiryTime || Date.now() > expiryTime) {
-      localStorage.removeItem('jwt');
-      localStorage.removeItem('expiryTime');
 
-      window.location.href = "/login.html?SessionExpired=true";
-      return null;
-    }
-    return localStorage.getItem('jwt');
-  }
+  
+  // // Function to retrieve the JWT token from localStorage
+  // function getToken() {
+  //   const expiryTime = localStorage.getItem('expiryTime');
+  //   if (!expiryTime || Date.now() > expiryTime) {
+  //     localStorage.removeItem('jwt');
+  //     localStorage.removeItem('expiryTime');
+
+  //     window.location.href = "/login.html?SessionExpired=true";
+  //     return null;
+  //   }
+  //   return localStorage.getItem('jwt');
+  // }
   
   
 
