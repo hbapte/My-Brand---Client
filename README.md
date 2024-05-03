@@ -1,6 +1,6 @@
 # My Brand Frontend
 
-This repository contains the frontend codebase for My Brand, a web application designed for managing blogs, user authentication, and more.
+This repository contains the frontend codebase for My Brand Project
 
 ## Links
 
