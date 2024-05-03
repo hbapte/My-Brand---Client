@@ -1,13 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
   const token = localStorage.getItem('jwt');
   const expiryTime = localStorage.getItem('expiryTime');
-  
+
   if (!token || !expiryTime || Date.now() > expiryTime) {
-    // Token has expired or doesn't exist, remove it from localStorage
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('expiryTime');
-    window.location.href = '/login.html?sessionExpired=true';
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('expiryTime');
+      window.location.href = '/login.html?sessionExpired=true';
   }
+
+  // event listener to logout link
+  const logoutLink = document.querySelector('.sidebar__logout a');
+  logoutLink.addEventListener('click', function (event) {
+      event.preventDefault();
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('expiryTime');
+
+      window.location.href = '/login.html';
+  });
 });
 
 
@@ -40,11 +49,6 @@ function toggleSidebar() {
     }
   }
 
-  
-
-       // Check if the user has a login token when the page loads
-
-  
 
   async function fetchAndDisplayPublishedBlogsCount() {
     try {
@@ -59,17 +63,12 @@ function toggleSidebar() {
 }
 
 
-
-
-
-fetchAndDisplayPublishedBlogsCount(); // Fetch and display published blogs count when the page loads
-
-// Update the JavaScript code
+fetchAndDisplayPublishedBlogsCount(); 
 async function fetchAndDisplayMessagesCount() {
     try {
       const response = await fetch('https://my-brand-oxuh.onrender.com/api/contact');
       const messages = await response.json();
-      const totalMessagesCount = messages.length; // Get the total number of messages
+      const totalMessagesCount = messages.length; 
       const totalMessagesCountElement = document.getElementById('totalMessagesCount');
       totalMessagesCountElement.textContent = totalMessagesCount;
     } catch (error) {
@@ -77,7 +76,6 @@ async function fetchAndDisplayMessagesCount() {
     }
   }
   
-  // Call the function when the page loads
   window.addEventListener('load', () => {
     fetchAndDisplayMessagesCount();
   });
