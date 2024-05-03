@@ -26,8 +26,9 @@ Figma Design: [My Brand Figma Design](https://www.figma.com/file/CE5IDZeOPQJRojW
 ## Features
 
 * **User Authentication**: Secure login and registration functionality.
+* **Cloudinary Integration**: Upload blog images to cloudinary
 * **Blog Management**: Create, edit, and delete blogs.
-* **Dashboard**: Access to a dashboard for managing blogs and user settings.
+* **Dashboard**: Access to a dashboard for managing blogs,....
 * **Responsive Design**: Ensures compatibility across various devices and screen sizes.
 
 ## Technologies Used
