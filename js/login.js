@@ -1,59 +1,140 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.getElementById("LoginForm");
-    const messageDiv = document.getElementById("message");
-  
-    loginForm.addEventListener("submit", async function (event) {
-      event.preventDefault(); 
-  
+  const loginForm = document.getElementById("LoginForm");
+  const messageDiv = document.getElementById("message");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+
+  loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      const valid = validateLoginForm(email, password);
+      if (!valid) return; 
+
       const formData = new FormData(loginForm);
       const formDataJSON = {};
       formData.forEach((value, key) => {
-        formDataJSON[key] = value;
+          formDataJSON[key] = value;
       });
-  
-      try {
-        const response = await fetch("https://my-brand-oxuh.onrender.com/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(formDataJSON)
-        });
-  
-        const responseData = await response.json();
-  
-        if (response.ok) {
-          messageDiv.textContent = "Login successful";
-          messageDiv.style.color = "green";
-  
-          const token = responseData.token;
-          const expiryTime = Date.now() + 60 * 60 * 1000; // 1 hour from now
-          localStorage.setItem('jwt', token);
-          localStorage.setItem('expiryTime', expiryTime);
-  
-          window.location.href = "/admin/dashboard.html";
-        } else if (response.status === 401) {
 
-          if (responseData.error === 'User not found') {
-            messageDiv.textContent = 'User not found';
-          } else if (responseData.error === 'Please verify your email before logging in') {
-            messageDiv.textContent = 'Please verify your email before logging in';
+      try {
+          const response = await fetch("https://my-brand-oxuh.onrender.com/api/auth/login", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(formDataJSON)
+          });
+
+          const responseData = await response.json();
+
+          if (response.ok) {
+              showSuccessMessage("Login successful");
+
+              const token = responseData.token;
+              const expiryTime = Date.now() + 60 * 60 * 1000; // 1 hour from now
+              localStorage.setItem('jwt', token);
+              localStorage.setItem('expiryTime', expiryTime);
+
+              window.location.href = "/admin/dashboard.html";
+          } else if (response.status === 401) {
+              if (responseData.error === 'User not found') {
+                  showError('User not found');
+              } else if (responseData.error === 'Please verify your email before logging in') {
+                  showError('Please verify your email before logging in');
+              } else {
+                  showError('Wrong password');
+              }
           } else {
-            messageDiv.textContent = 'Wrong password';
+              // Other errors
+              showError(responseData.error || "An error occurred");
           }
-          messageDiv.style.color = "red";
-        } else {
-          // Other errors
-          messageDiv.textContent = responseData.error || "An error occurred";
-          messageDiv.style.color = "red";
-        }
       } catch (error) {
-        console.error("Error:", error);
-        messageDiv.textContent = "An error occurred";
-        messageDiv.style.color = "red";
+          console.error("Error:", error);
+          showError("An error occurred");
       }
-    });
   });
+
+  // PASSWORD VISIBILITY =======
+  function togglePasswordVisibility() {
+      if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+      } else {
+          passwordInput.type = "password";
+      }
+  }
+});
+
+// Function to perform client-side validation
+function validateLoginForm(email, password) {
+  const emailError = document.getElementById("email-Error");
+  const passwordError = document.getElementById("password-Error");
+  let valid = true;
+
+  // Reset previous error messages
+  emailError.textContent = "";
+  passwordError.textContent = "";
+
+  // Validate email
+  if (email === "") {
+      emailError.textContent = "Email is required";
+      valid = false;
+  } else if (!validateEmail(email)) {
+      emailError.textContent = "Invalid email";
+      valid = false;
+  }
+
+  // Validate password
+  if (password === "") {
+      passwordError.textContent = "Password is required";
+      valid = false;
+  } else if (password.length < 6) {
+      passwordError.textContent = "Password should be at least 6 characters long";
+      valid = false;
+  } else if (!isPasswordStrong(password)) {
+      passwordError.textContent = "Password requires capital & lowercase letters, number & special character";
+      valid = false;
+  }
+
+  return valid;
+}
+
+// Function to validate email format
+function validateEmail(email) {
+  const re = /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return re.test(email);
+}
+
+// Function to check password strength
+function isPasswordStrong(password) {
+  // Password should be at least 6 characters long and contain capital and lowercase letters, and special characters
+  const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$/;
+  return re.test(password);
+}
+
+function showSuccessMessage(message) {
+  const successMessage = document.getElementById('message');
+  successMessage.textContent = message;
+  successMessage.style.color = 'green';
+  successMessage.style.textAlign = 'center';
+  setTimeout(function() {
+      successMessage.textContent = '';
+  }, 3500); 
+}
+
+function showError(message) {
+  const errorMessageElement = document.getElementById('message');
+  errorMessageElement.textContent = message;
+  errorMessageElement.style.color = 'red';
+  errorMessageElement.style.textAlign = 'center';
+
+  setTimeout(function () {
+      errorMessageElement.textContent = '';
+  }, 3000);
+}
+
   
   // Function to retrieve the JWT token from localStorage
   function getToken() {
@@ -68,3 +149,14 @@ document.addEventListener("DOMContentLoaded", function () {
     return localStorage.getItem('jwt');
   }
   
+  
+
+    // PASSWORD VISIBILITY =======
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
